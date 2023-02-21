@@ -18,6 +18,34 @@ class MyClass2 {
 }
 
 fun main() {
+    var data13: Any = "hi"
+    when(data13) {
+        is String -> println("data is String")
+        in 1..10 -> println("data is 1..10")
+        else -> {
+            println("data is not valid")
+        }
+    }
+
+    var data12 = "hi"
+    when(data12) {
+        "hi" -> println("data is hi")
+        "hello" -> println("data is hello")
+        else -> {
+            println("data is not valid")
+        }
+    }
+
+    var data = 10
+    val result = if(data>0) {
+        println("테스트")
+        true
+    } else {
+        println("else 테스트")
+        false
+    }
+    println("result 결과값 테스트: $result")
+
     // 가변 길이의 List, Map
     val data11 = mutableMapOf<String, Any>()
     data11.set("key", "value")
