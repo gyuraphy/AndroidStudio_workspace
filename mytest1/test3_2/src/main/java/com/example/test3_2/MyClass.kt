@@ -1,6 +1,6 @@
 package com.example.test3_2
 // 전역 변수(최고 상위 영역: 선언과 동시에 초깃값 할당)
-val name= "이상용"
+//val name= "이상용"
 val name2: String = "이상용2"
 val num = 10
 val data5: Int by lazy {
@@ -17,7 +17,89 @@ class MyClass2 {
     lateinit var data1: String
 }
 
+class User {
+    var name = "lsy"
+    constructor(name: String) {
+        this.name = name
+    }
+    fun someFun() {
+        println("name: $name")
+    }
+}
+
+class User2(name: String, age: Int) {
+    init {
+        println("객체 생성시 init 실행")
+    }
+}
+
+class User3(val name: String, age: Int) {
+    init {
+        println("init안에서는 주생성자 매개변수 사용 가능! $name, $age")
+    }
+    // var, val로 지정하면 다른 함수에서도 사용 가능
+    fun someFun() {
+        println("name: $name")
+    }
+}
+
+class User4(name: String,age: Int, phone: String) {
+//    constructor(name: String, age: Int): this(name)
+
+//    constructor(name: String, age: Int, phone: String): this(name)
+}
+
+open class Super(name: String) {
+}
+
+class Sub: Super {
+    constructor(name: String): super(name)
+}
+
+
 fun main() {
+    var user5 = User3("lsy5", 40)
+    user5.someFun()
+
+    var user2 = User2("lsy2", 30)
+    var user3 = User2("lsy3",30)
+    var user4 = User2("lsy4", 30)
+
+    var myClass2 = MyClass2()
+    myClass2.age
+
+    // 객체 생성시 new 없이 바로 생성자 호출 방법
+    val user = User("lsy2")
+    user.someFun()
+
+    var data16 = arrayOf<Int>(10, 20, 30)
+    for ((index, value) in data16.withIndex()) {
+        print(data16[index])
+        if (index != data16.size - 1) print(",")
+    }
+    println("==========================")
+    var data15 = arrayOf<Int>(10, 20, 30)
+    for (i in data15.indices) {
+        print(data15[i])
+        if (i != data15.size - 1) print(",")
+    }
+    println("==========================")
+    var sum: Int = 0
+    for(i in 1..10) {
+        sum += i
+    }
+    println(sum)
+
+    var data14: Any = "hi"
+    var result14 = when(data14) {
+        is String -> println("data is String")
+        in 1..10 -> println("data is 1..10")
+        else -> {
+            println("data is not valid")
+        }
+    }
+    println("when 표현식 사용 결과값 테스트: $result14")
+
     var data13: Any = "hi"
     when(data13) {
         is String -> println("data is String")
