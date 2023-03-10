@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.WindowMetrics
 import com.example.test9.databinding.ActivityMain255Binding
 
@@ -16,11 +17,13 @@ class MainActivity255 : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val windowMetrics: WindowMetrics = windowManager.currentWindowMetrics
             binding.textView.text = "width : ${windowMetrics.bounds.width()}, height : ${windowMetrics.bounds.height()}"
+            Log.d("lsy", "api 레벨 30 이상이 맞네요! 너비 : ${windowMetrics.bounds.width()}, 높이 : ${windowMetrics.bounds.height()}")
         } else {
             val display = windowManager.defaultDisplay
             val displayMetrics = DisplayMetrics()
             display?.getRealMetrics(displayMetrics)
             binding.textView.text = "width : ${displayMetrics.widthPixels}, height : ${displayMetrics.heightPixels}"
+            Log.d("lsy", "api 레벨 30 보다 낮네요")
         }
     }
 }
