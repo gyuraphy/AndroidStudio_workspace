@@ -30,6 +30,7 @@ class MainActivity355 : AppCompatActivity() {
         binding.viewpager.adapter = adapter
     }
 
+    // 어댑터 프래그먼트를 이용한 방식
     class MyFragmentPagerAdapter(activity: FragmentActivity): FragmentStateAdapter(activity){
         val fragments: List<Fragment>
         init {
