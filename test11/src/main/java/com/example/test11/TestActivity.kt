@@ -15,28 +15,44 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.test11.databinding.ActivityMain342Binding
-import com.example.test11.databinding.ActivityMain350Binding
+import com.example.test11.databinding.ActivityTestBinding
 import com.example.test11.databinding.Item342Binding
+import com.example.test11.databinding.TestItemBinding
 
-class MainActivity350 : AppCompatActivity() {
+class TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMain350Binding.inflate(layoutInflater)
+
+        // 리사이클러가 부여줄 레이아웃
+        val binding = ActivityTestBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val datas = mutableListOf<String>()
-        for(i in 1..9){
-            datas.add("Item $i")
-        }
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        datas.add("한식")
+        datas.add("일식")
+        datas.add("중식")
+        datas.add("아무거나")
+        datas.add("추가메뉴")
+
+        // 추가로 레이아웃을 변경하고 싶다면, 이 부분을 수정하기!
+        val layoutManager2 = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
+
+//        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.layoutManager = layoutManager2
         binding.recyclerView.adapter = MyAdapter(datas)
+//        (binding.recyclerView.adapter as MyAdapter).notifyDataSetChanged()
+//        binding.recyclerView.addItemDecoration(
+//            DividerItemDecoration(this,
+//                LinearLayoutManager.VERTICAL)
+//        )
+        // 목록뒤에 배치할 배경이미지 추가, 목록 앞에 배치할 로고 추가, 각 항목 디자인 변경
         binding.recyclerView.addItemDecoration(MyDecoration(this))
     }
 
-    class MyViewHolder(val binding: Item342Binding): RecyclerView.ViewHolder(binding.root)
+    class MyViewHolder(val binding: TestItemBinding): RecyclerView.ViewHolder(binding.root)
 
     class MyAdapter(val datas: MutableList<String>): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
@@ -46,11 +62,17 @@ class MainActivity350 : AppCompatActivity() {
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
-                = MyViewHolder(Item342Binding.inflate(LayoutInflater.from(parent.context), parent, false))
+                = TestActivity.MyViewHolder(
+            TestItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             Log.d("kkang","onBindViewHolder : $position")
-            val binding=(holder as MyViewHolder).binding
+            val binding=(holder as TestActivity.MyViewHolder).binding
             //뷰에 데이터 출력
             binding.itemData.text= datas[position]
 
@@ -109,4 +131,3 @@ class MainActivity350 : AppCompatActivity() {
         }
     }
 }
-
