@@ -8,7 +8,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.K1109_Android_kot_Class_Ex">
         <activity
-            android:name=".AfterLoginActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
