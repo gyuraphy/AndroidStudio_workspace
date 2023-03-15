@@ -48,10 +48,15 @@ class MainActivity424 : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         val data1 = savedInstanceState.getString("data1")
         val data2 = savedInstanceState.getInt("data2")
+        val data3 = savedInstanceState.getInt("onSaveCount")
+        val data4 = savedInstanceState.getInt("onRestoreCount")
+        val editText2 = savedInstanceState.getString("editText")
 
+        binding.editText.hint = editText2
         binding.countResultView.text="$data1 - $data2"
         Log.d("lsy", "onRestoreInstanceState 호출 부분. onRestoreCount횟수: $onRestoreCount")
         onRestoreCount++
+        binding.countRestView.text = "countRestView: $data4"
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -59,8 +64,11 @@ class MainActivity424 : AppCompatActivity() {
         Log.d("kkang","onSaveInstanceState..........")
         outState.putString("data1", "hello")
         outState.putInt("data2", 10)
-
+        outState.putInt("onSaveCount", onSaveCount)
+        outState.putInt("onRestoreCount", onRestoreCount)
+        outState.putString("editText", binding.editText.text.toString())
         Log.d("lsy", "onSaveInstanceState 호출 부분. onSaveCount횟수: $onSaveCount")
         onSaveCount++
+        binding.countSaveView.text = "countSaveView: $onSaveCount"
     }
 }
