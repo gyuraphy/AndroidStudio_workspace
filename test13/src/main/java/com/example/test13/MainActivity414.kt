@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.test13.databinding.ActivityMain406Binding
 import com.example.test13.databinding.ActivityMain414Binding
 
 class MainActivity414 : AppCompatActivity() {
@@ -15,7 +14,8 @@ class MainActivity414 : AppCompatActivity() {
 
         binding.button1.setOnClickListener {
             val intent = Intent()
-            intent.action = "ACTION_EDIT"
+//            intent.action = "ACTION_EDIT"
+            intent.action = Intent.ACTION_VIEW
             intent.data = Uri.parse("http://www.google.com")
             startActivity(intent)
         }

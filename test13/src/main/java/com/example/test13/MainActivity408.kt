@@ -14,10 +14,12 @@ class MainActivity408 : AppCompatActivity() {
         val binding = ActivityMain408Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // 후 처리를 하는 코드
+        // requestLauncher 선언
         val requestLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult())
         {
-
+            // it, 디테일 액티비티에서 넘어온 데이터, 인텐트
             val resultData = it.data?.getStringExtra("result")
             binding.mainResultView.text = "result : $resultData"
         }
@@ -27,6 +29,7 @@ class MainActivity408 : AppCompatActivity() {
             val intent: Intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("data1", "hello")
             intent.putExtra("data2", 10)
+            // requestLauncher 사용
             requestLauncher.launch(intent)
         }
     }
