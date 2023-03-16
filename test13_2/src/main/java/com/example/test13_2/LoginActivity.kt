@@ -29,22 +29,26 @@ class LoginActivity : AppCompatActivity() {
     }
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         val saveId = savedInstanceState.getString("saveId")
         val savePwd = savedInstanceState.getString("savePwd")
 
         binding.id.hint = saveId
         binding.pwd.hint = savePwd
+        Log.d("lsy", "onRestore함수안에 saveId값: $saveId, savePwd값: $savePwd")
     }
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val id = binding.id.text
-        val pwd = binding.pwd.text
-
-        outState.putString("saveId", "$id")
-        outState.putString("savePwd", "$pwd")
-
+        val id = binding.id.hint
+        val pwd = binding.pwd.hint
+        Log.d("lsy", "onSave함수안에 saveId값: $id, savePwd값: $pwd")
+        val saveId = outState.putString("saveId", "$id")
+        val savePwd = outState.putString("savePwd", "$pwd")
+        Log.d("lsy", "onSave함수안에 saveId값: $saveId, savePwd값: $savePwd")
     }
 }
