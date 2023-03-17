@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                 val option = BitmapFactory.Options()
                 option.inSampleSize = calRatio
                 // 넘어온 사진이 바이트로 읽은 객체(inputStream) 존재
+                // contentResolver -> 외부 저장소에 접근시 권한이 필요가 없음
                 var inputStream = contentResolver.openInputStream(it.data!!.data!!)
                 val bitmap = BitmapFactory.decodeStream(inputStream, null, option)
                 inputStream!!.close()
@@ -137,3 +138,15 @@ class MainActivity : AppCompatActivity() {
         return inSampleSize
     }
 }
+
+ /*
+                1) 현재, 액티비티에서 , 파일을 선언
+                2) fileUpload 함수의 정의 부분에서, 매개변수1: 사진첩에서 읽은 바이트 단위의 배열
+                3) 두 매개변수 만들어서, : 파일로 쓰기 위한 실제 물리 파일.
+                4) 실제 물리 파일에 사진의 이미지 저장.
+                5) 실제 물리 파일의 경로를 알수 있음.
+                6) 해당 경로의 Uri 를 알아내서.
+                7) inputStream 담을 예정.
+                8) bitmap 변환 작업
+                9) 붙이는 작업.
+ */
